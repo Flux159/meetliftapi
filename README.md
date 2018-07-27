@@ -9,6 +9,7 @@ DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5433 node app.js
 In a new terminal session, run your react code:
 ```
 cd ./react
+export PORT=3001
 npm run start
 ```
 

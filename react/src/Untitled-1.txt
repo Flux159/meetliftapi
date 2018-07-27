@@ -1,0 +1,38 @@
+ columns={ [
+            {
+              Header: "Name",
+              accessor:  ,     
+            },
+            {
+              Header: "Squat 1",
+              accessor: "sqt1",
+              Cell: ({row,original})   => (
+                <div style={{
+                  backgroundColor: original.sqt1_res === true ? '#85cc00'
+                    : original.sqt1_res === false? '#FF0000'
+                    : '#ffffff',
+                }}> {row.sqt1} </div>
+              )
+            },
+            {
+              Header: "Squat 2",
+              accessor: "sqt2",
+              Cell: ({row,original})   => (
+                <div style={{
+                  backgroundColor: original.sqt2_res === true ? '#85cc00'
+                    : original.sqt2_res === false? '#FF0000'
+                    : '#ffffff',
+                }}> {row.sqt2} </div>
+              )
+            },
+            {
+              Header: "Squat 3",
+              accessor: "sqt3",Cell: ({row,original})   => (
+                <div style={{
+                  backgroundColor: original.sqt3_res === true ? '#85cc00'
+                    : original.sqt3_res === false? '#FF0000'
+                    : '#ffffff',
+                }}> {row.sqt3} </div>
+              )
+            },
+          ]}

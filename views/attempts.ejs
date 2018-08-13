@@ -1,0 +1,9 @@
+<% layout('layout') -%>
+
+<h1>All attempts</h1>
+
+<ul>
+	<% attempts.forEach(function(attempt) { %>
+    <li> <%= attempt.attempt_num %> <%= attempt.attempt_weight %>  </li>
+  <% }); %>
+</ul>

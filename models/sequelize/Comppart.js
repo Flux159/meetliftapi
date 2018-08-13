@@ -7,7 +7,7 @@ module.exports = function(db, DataTypes) {
         allowNull: false,
         primaryKey: true
       },
- 
+      person_id: DataTypes.INTEGER,
       flight: DataTypes.STRING,
       team: DataTypes.STRING,
       est_weight: DataTypes.DOUBLE,
@@ -16,21 +16,15 @@ module.exports = function(db, DataTypes) {
       bench_rh: DataTypes.INTEGER,
     }, {
       tableName: 'comp_participant',
+      timestamps: false,
 
       classMethods: {
         associate: (models) => {
           CompPart.hasMany(models.Attempt,{foreignKey: 'comp_part_id',} );
         },
-        /*associate: (models) => {
-          CompPart.belongsTo(models.Comp, {
-            foreignKey: 'compID',
-          });
-        },
         associate: (models) => {
-          CompPart.belongsTo(models.Person, {
-            foreignKey: 'personID',
-          });
-        },*/
+          CompPart.belongsTo(models.Person,{foreignKey: 'person_id',} );
+        },
       },
   
     });

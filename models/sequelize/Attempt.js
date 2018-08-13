@@ -7,7 +7,8 @@ module.exports = function(db, DataTypes) {
         allowNull: false,
         primaryKey: true
       },
- 
+      comp_event_id: DataTypes.INTEGER,
+      comp_part_id: DataTypes.INTEGER,
       attempt_num: DataTypes.INTEGER,
       attempt_weight: DataTypes.STRING,
       attempt_result: DataTypes.BOOLEAN,
@@ -16,23 +17,15 @@ module.exports = function(db, DataTypes) {
       timestamps: false,
 
       classMethods: {
+
         associate: (models) => {
-          Attempt.belongsTo(models.CompPart, {
-            foreignKey: 'comp_part_id',
-          });
+          Attempt.belongsTo(models.CompEvent, {foreignKey: 'comp_event_id',});
         },
         associate: (models) => {
-          Attempt.belongsTo(models.CompEvent, {
-            foreignKey: 'comp_event_id',
-          });
+          Attempt.belongsTo(models.CompPart, {foreignKey: 'comp_part_id',});
         },
       },   
-    })/*
-    Attempt.associate = function (db) {
-      CompPart.belongsTo(db.CompPart, { 
-       foreignKey: 'comp_part_id'
-      })
-    }*/;
+    });
   
     return Attempt;
   };

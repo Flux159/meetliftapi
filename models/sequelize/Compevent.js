@@ -7,27 +7,24 @@ module.exports = function(db, DataTypes) {
         allowNull: false,
         primaryKey: true
       },
- 
-      compeventName: DataTypes.STRING,
-      compeventOrder: DataTypes.INTEGER,
+      comp_id: DataTypes.INTEGER,
+      event_id: DataTypes.INTEGER,
+      comp_event_name: DataTypes.STRING,
+      comp_event_order: DataTypes.INTEGER,
       no_of_events: DataTypes.INTEGER,
       flight: DataTypes.STRING,
     }, {
       tableName: 'comp_event',
-/*
+      timestamps: false,
+
       classMethods: {
         associate: (models) => {
-          Attempt.belongsTo(models.Comp, {
-            foreignKey: 'compID',
+          CompEvent.hasMany(models.Attempt, {
+            foreignKey: 'comp_event_id',
           });
         },
-        associate: (models) => {
-            Attempt.belongsTo(models.Event, {
-              foreignKey: 'eventID',
-            });
-          },
       },
-*/
+
      
     });
   

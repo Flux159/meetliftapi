@@ -3,53 +3,54 @@ import ReactDOM from 'react-dom';
 
 import ReactTable from "react-table";
 import ReactCountdownClock from "react-countdown-clock";
-/* import twentyfivelb from './barbellcalc/25lbs.png'
+import twentyfivelbs from './barbellcalc/25lbs.png'
 import fortyfivelbs from './barbellcalc/45lbs.png'
 import tenlbs from './barbellcalc/10lbs.png'
 import fivelbs from './barbellcalc/5lbs.png'
 import twolbs from './barbellcalc/2lbs.png'
-import onelbs from './barbellcalc/1lbs.png' */
+import onelbs from './barbellcalc/1lbs.png' 
+import collarlink from './barbellcalc/collar.png' 
 import "react-table/react-table.css";
 
 var lifters =[ 
     [// squat;
       [ //  squat attempt 0
-        ['Adam', 86, null],
-        ['Bob', 173, null],
-        ['Charlie', 100, null],
-        ['David',200,null]
+        ['Adam', 220, null],
+        ['Bob', 145, null],
+        ['Charlie', 245, null],
+        ['David',305,null]
       ],
       [ //  squat attempt 1   
-        ['Adam', 95, null],
-        ['Bob', 184, null],      
-        ['Charlie', 110, null],
-        ['David',220,null]
+        ['Adam', 230, null],
+        ['Bob', 155, null],      
+        ['Charlie', 265, null],
+        ['David',315,null]
       ],
       [ //squat attempt 2    
-        ['Adam', 102, null],
-        ['Bob', 193, null],
-        ['Charlie', 120, null],
-        ['David',230,null]
+        ['Adam', 230, null],
+        ['Bob', 165, null],
+        ['Charlie', 275, null],
+        ['David',335,null]
       ]
     ],
     [// press
       [  // press; event 1, attempt 0
-        ['Adam', 60, null],
-        ['Bob', 84, null],
-        ['Charlie', 35, null],
-        ['David',100, null]
+        ['Adam', 105, null],
+        ['Bob', 80, null],
+        ['Charlie', 135, null],
+        ['David',135, null]
       ],
       [  // press; event 1, attempt 1      
-        ['Adam', 66, null],
-        ['Bob', 89, null],      
-        ['Charlie', 35, null],
-        ['David',110,null]
+        ['Adam', 110, null],
+        ['Bob', 87.5, null],      
+        ['Charlie', 145, null],
+        ['David',150,null]
       ],
       [  //press; event 1, attempt 2      
-        ['Adam', 70, null],
-        ['Bob', 89, null],
-        ['Charlie', 40, null],
-        ['David', 20, null]
+        ['Adam', 112.5, null],
+        ['Bob', 92.5, null],
+        ['Charlie', 152.5, null],
+        ['David', 155, null]
       ]
     ]
   ]; 
@@ -63,7 +64,6 @@ function sortlift(a, b) {
         return (a[1] < b[1]) ? -1 : 1;
     }
 }
-
 
 class App extends React.Component {
   constructor(props) {
@@ -120,7 +120,7 @@ class App extends React.Component {
   return (
     <div >
 
-    <div className='left-half' >
+    <span >
       Current Lifter: {eventattempt[this.state.currlifter][0]} <br /> 
       Attempt Weight : {currlift} <br />
       Attempt: {this.state.currattempt+1} <br />
@@ -137,11 +137,11 @@ class App extends React.Component {
       size={100}
       paused ={this.state.timerpaused} />
 
-    </div>
-    <div className='right-half'>
+    </span>
+    <span >
     <BarbellCalc lifters={this.state.lifters} currevent={this.state.currevent} currattempt={this.state.currattempt} 
     currlifter={this.state.currlifter}/>
-    </div>
+    </span>
 
     <div>
     <Liftertable lifters={this.state.lifters}/>
@@ -249,47 +249,42 @@ class Liftertable extends React.Component{
 const plateinv = [ 
   [45,   6],
   [25,   2],
-  [15,   0],
+  [15,   0  ],
   [10,   2],
   [5,    2],
   [2.5,  2],
   [1.25, 2],
-  [.5,   0],
-  [.25,  0],
 ]
-const bar = 20; 
-const collar = 2.5; 
+const bar = 45; // pounds
+const collar = 5; // pounds
 
 var loadedbar = [ 
-  [45, 0],
-  [25, 0],
-  [15, 0],
-  [10, 0],
-  [5, 0],
-  [2.5, 0],
-  [1.25, 0],
-  [.5, 0],
-  [.25, 0],
+  [45,   0,<img src={fortyfivelbs} alt='45'/>],
+  [25,   0,<img src={twentyfivelbs} alt='25'/>  ],
+  [15,0,  <img src={fortyfivelbs} alt='15' /> ],
+  [10,   0, <img src={tenlbs} alt='10'/>],
+  [5,    0, <img src={fivelbs} alt='5' />],
+  [2.5,  0, <img src={twolbs} alt='2.5'/>],
+  [1.25, 0, <img src={onelbs} alt ='1.5'/>],
 ]
+const collarimg =  <img src={collarlink} alt='collar'/>
+
 class BarbellCalc extends React.Component{
-  
   render() {
       var remainder= this.props.lifters[this.props.currevent][this.props.currattempt][this.props.currlifter][1] - bar - collar*2;
       var bar_rhs =[];
       for (var i =0; i<loadedbar.length; i++){
-          loadedbar[i][1]=Math.min(Math.floor(remainder/(2*loadedbar[i][0]),plateinv[i][1]));
+          loadedbar[i][1]=Math.min(Math.floor(remainder/(2*loadedbar[i][0])) , plateinv[i][1] );
           remainder= remainder - loadedbar[i][0]* loadedbar[i][1] *2;
           
           for(var j=0; j<loadedbar[i][1];j++){
-           //bar_rhs.push(  '<img src={' +  + '}/> ')
-            bar_rhs.push(   loadedbar[i][0] + " " )
-            console.log(loadedbar[i][2])
+            bar_rhs.push(loadedbar[i][2])
           };
       };
-      //console.log(bar_rhs)
-
+      bar_rhs.push(collarimg)
+      console.log(loadedbar)
       return(
-          <span> {bar_rhs}  </span>
+          <span> {bar_rhs}    </span>
       )
   }
 

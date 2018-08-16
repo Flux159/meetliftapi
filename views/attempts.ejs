@@ -6,6 +6,8 @@
 	<% attempts.forEach(function(attempt) { %>
     <li>  <%= attempt.CompPart.Person.person_first_name %>
         <%= attempt.CompPart.Person.person_last_name %>
-        <%= attempt.CompPart.team %>  <%= attempt.attempt_num %> <%= attempt.attempt_weight %>  </li>
+        <%= attempt.CompPart.team %> 
+        <%= attempt.CompEvent.comp_event_name %> 
+         <%= attempt.attempt_num %> <%= attempt.attempt_weight %>   <%= attempt.attempt_weight %>  </li>
   <% }); %>
 </ul>

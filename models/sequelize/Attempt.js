@@ -17,12 +17,9 @@ module.exports = function(db, DataTypes) {
       timestamps: false,
 
       classMethods: {
-
         associate: (models) => {
-          Attempt.belongsTo(models.CompEvent, {foreignKey: 'comp_event_id',});
-        },
-        associate: (models) => {
-          Attempt.belongsTo(models.CompPart, {foreignKey: 'comp_part_id',});
+          Attempt.belongsTo(models.CompEvent, {foreignKey: 'comp_event_id'});
+          Attempt.belongsTo(models.CompPart, {foreignKey: 'comp_part_id'});
         },
       },   
     });

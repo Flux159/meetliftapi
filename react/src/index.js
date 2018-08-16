@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 
 import ReactTable from "react-table";
 import ReactCountdownClock from "react-countdown-clock";
-
+/* import twentyfivelb from './barbellcalc/25lbs.png'
+import fortyfivelbs from './barbellcalc/45lbs.png'
+import tenlbs from './barbellcalc/10lbs.png'
+import fivelbs from './barbellcalc/5lbs.png'
+import twolbs from './barbellcalc/2lbs.png'
+import onelbs from './barbellcalc/1lbs.png' */
 import "react-table/react-table.css";
 
 var lifters =[ 
@@ -114,7 +119,8 @@ class App extends React.Component {
   
   return (
     <div >
-    <div >
+
+    <div className='left-half' >
       Current Lifter: {eventattempt[this.state.currlifter][0]} <br /> 
       Attempt Weight : {currlift} <br />
       Attempt: {this.state.currattempt+1} <br />
@@ -122,8 +128,8 @@ class App extends React.Component {
     <button onClick={() => this.nextlift(true)}> Good Lift </button> 
     <button onClick={() => this.nextlift(false) }> Bad Lift </button> <br/>
     <button onClick={() => this.nextlift(null) }> Next lifter </button>
-    <button> Previous lifter </button>
-    
+    <button> Previous lifter not built yet </button>
+   
 
     <ReactCountdownClock seconds={this.state.time}
       color="#000"
@@ -132,15 +138,18 @@ class App extends React.Component {
       paused ={this.state.timerpaused} />
 
     </div>
+    <div className='right-half'>
+    <BarbellCalc lifters={this.state.lifters} currevent={this.state.currevent} currattempt={this.state.currattempt} 
+    currlifter={this.state.currlifter}/>
+    </div>
+
     <div>
     <Liftertable lifters={this.state.lifters}/>
     </div>
     </div>
   );
   }
-}
-
-//     <BarbellCalc lifters={this.state.lifters} currlifter={this.state.currlifter}/>
+} 
 
 class Liftertable extends React.Component{
 
@@ -238,22 +247,22 @@ class Liftertable extends React.Component{
 }
 
 const plateinv = [ 
-  [25,   6],
-  [20,   2],
-  [15,   2],
+  [45,   6],
+  [25,   2],
+  [15,   0],
   [10,   2],
   [5,    2],
   [2.5,  2],
   [1.25, 2],
-  [.5,   2],
-  [.25,  2],
+  [.5,   0],
+  [.25,  0],
 ]
 const bar = 20; 
 const collar = 2.5; 
 
 var loadedbar = [ 
+  [45, 0],
   [25, 0],
-  [20, 0],
   [15, 0],
   [10, 0],
   [5, 0],
@@ -272,14 +281,15 @@ class BarbellCalc extends React.Component{
           remainder= remainder - loadedbar[i][0]* loadedbar[i][1] *2;
           
           for(var j=0; j<loadedbar[i][1];j++){
-              bar_rhs.push( loadedbar[i][0] + " ")
+           //bar_rhs.push(  '<img src={' +  + '}/> ')
+            bar_rhs.push(   loadedbar[i][0] + " " )
+            console.log(loadedbar[i][2])
           };
       };
-      bar_rhs.push("Collar")
-      console.log(bar_rhs)
+      //console.log(bar_rhs)
 
       return(
-          <div>{bar_rhs} </div>
+          <span> {bar_rhs}  </span>
       )
   }
 

@@ -110,6 +110,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+// TODO: I think that this line is causing xsrf/csrf issue when posting to /postAttempts
 app.use(lusca({
   csrf: { angular: true },
   xframe: 'SAMEORIGIN',
@@ -156,6 +158,8 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 //app.get('/books', bookController.getBooks);
 app.get('/attempts',attemptController.getAttempts)
 app.get('/attemptsJSON', attemptController.getAttemptsJSON);
+app.post('/postAttempts', attemptController.postAttempts);
+
 /**
  * API examples routes.
  */

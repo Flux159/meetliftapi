@@ -1,10 +1,19 @@
 
 import React from 'react';
+import Cookies from 'js-cookie';
 
 class Checkin extends React.Component {
     state = {
         data: [],
+        checkinData: '',
     };
+
+    constructor(props) {
+        super(props);
+
+        this.updateCheckinData = this.updateCheckinData.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+    }
 
     componentDidMount() {
         this.requestAttempts();
@@ -16,16 +25,57 @@ class Checkin extends React.Component {
         this.setState({data});
     }
 
-    render() {
-      console.log(this.state.data);
+    async submitForm() {
+        console.log('submitting form');
 
+        console.log(this.state);
+
+        const formData = {
+            checkinData: this.state.checkinData,
+        };
+
+        // TODO: This is not working because of security issue w/ xsrf
+
+        const xsrfCookie = Cookies.get('XSRF-TOKEN');
+        const headers = new Headers({
+            'XSRF-TOKEN': xsrfCookie,
+            '_csrf': xsrfCookie,
+        });
+
+        const res = await fetch('/postAttempts', {
+            method: 'POST',
+            headers,
+            credentials: 'include',
+            body: JSON.stringify(formData),
+        })
+
+        console.log(res);
+    }
+
+    updateCheckinData(e) {
+        this.setState({checkinData: e.target.value});
+    }
+
+    renderForm() {
+        return (
+            <form>
+                <input type="text" placeholder="Checkindata" value={this.state.checkinData} onChange={this.updateCheckinData} />
+                <button onClick={this.submitForm}>Submit</button>
+            </form>
+        );
+    }
+
+    render() {
       const attemptsElements = this.state.data.map((attempt) => {
         return <div>{attempt.attempt_num}</div>;
       });
 
+      const formElements = this.renderForm();
+
       return (<div>
           Checkin
           {attemptsElements}
+          {formElements}
       </div>);
     }
 }

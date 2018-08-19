@@ -69,6 +69,14 @@ exports.getAttemptsJSON = function(req, res) {
   });
 };
 
+exports.postAttempts = function(req, res) {
+  // Handle stuff
+  console.log(req);
+  console.log(req.body);
+
+  res.json({data: 'hi'});
+};
+
 exports.setAttempts = function (req,res){
 
 };

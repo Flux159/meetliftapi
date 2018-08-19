@@ -19,7 +19,14 @@ class Checkin extends React.Component {
     render() {
       console.log(this.state.data);
 
-      return <div>Checkin</div>;
+      const attemptsElements = this.state.data.map((attempt) => {
+        return <div>{attempt.attempt_num}</div>;
+      });
+
+      return (<div>
+          Checkin
+          {attemptsElements}
+      </div>);
     }
 }
 

@@ -30,7 +30,7 @@ var loadedbar = [
     [2.5,  0, <img key={5} src={twolbs} alt='2.5'/>],
     [1.25, 0, <img key={6} src={onelbs} alt ='1.5'/>],
 ]
-const collarimg =  <img src={collarlink} alt='collar'/>
+const collarimg =  <img key={7} src={collarlink} alt='collar'/>
   
 class BarbellCalc extends React.Component{
     render() {

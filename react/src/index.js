@@ -8,12 +8,7 @@ import {
 } from 'react-router-dom';
 
 import RunMeet from './RunMeet';
-
-class Checkin extends React.Component {
-  render() {
-    return <div>Checkin</div>;
-  }
-}
+import Checkin from './Checkin';
 
 class App extends React.Component {
   render() {

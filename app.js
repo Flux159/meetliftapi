@@ -153,6 +153,7 @@ app.delete('/account', passportConf.isAuthenticated, userController.deleteAccoun
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 //app.get('/books', bookController.getBooks);
 app.get('/attempts',attemptController.getAttempts)
+app.get('/attemptsJSON', attemptController.getAttemptsJSON);
 /**
  * API examples routes.
  */

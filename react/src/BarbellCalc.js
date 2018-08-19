@@ -22,13 +22,13 @@ const bar = 45; // pounds
 const collar = 5; // pounds
 
 var loadedbar = [ 
-    [45,   0,<img src={fortyfivelbs} alt='45'/>],
-    [25,   0,<img src={twentyfivelbs} alt='25'/>  ],
-    [15,0,  <img src={fortyfivelbs} alt='15' /> ],
-    [10,   0, <img src={tenlbs} alt='10'/>],
-    [5,    0, <img src={fivelbs} alt='5' />],
-    [2.5,  0, <img src={twolbs} alt='2.5'/>],
-    [1.25, 0, <img src={onelbs} alt ='1.5'/>],
+    [45,   0,<img key={0} src={fortyfivelbs} alt='45'/>],
+    [25,   0,<img key={1} src={twentyfivelbs} alt='25'/>  ],
+    [15,0,  <img key={2} src={fortyfivelbs} alt='15' /> ],
+    [10,   0, <img key={3} src={tenlbs} alt='10'/>],
+    [5,    0, <img key={4} src={fivelbs} alt='5' />],
+    [2.5,  0, <img key={5} src={twolbs} alt='2.5'/>],
+    [1.25, 0, <img key={6} src={onelbs} alt ='1.5'/>],
 ]
 const collarimg =  <img src={collarlink} alt='collar'/>
   

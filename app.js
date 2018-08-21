@@ -18,6 +18,7 @@ var methodOverride = require('method-override');
 var multer = require('multer');
 var ejsEngine = require('ejs-mate');
 var Promise = require('bluebird');
+var formidable = require('express-formidable');
 
 //var MySQLStore = require('connect-mysql')({ session: session });
 var flash = require('express-flash');
@@ -33,7 +34,6 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-// var bookController = require('./controllers/book');
 var attemptController = require('./controllers/attempt');
 /**
  * API keys and Passport configuration.
@@ -71,6 +71,7 @@ app.use(logger('dev'));
 app.use(favicon(path.join(__dirname, 'public/favicon.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(multer({ dest: path.join(__dirname, 'uploads') }).single());
 app.use(expressValidator());
 app.use(methodOverride());
@@ -112,11 +113,18 @@ app.use(passport.session());
 app.use(flash());
 
 // TODO: I think that this line is causing xsrf/csrf issue when posting to /postAttempts
-app.use(lusca({
-  csrf: { angular: true },
-  xframe: 'SAMEORIGIN',
-  xssProtection: true
-}));
+
+app.use((req, res, next) => {
+  if (req.path === '/api/upload') {
+    next();
+  } else {
+    lusca.csrf()(req, res, next);
+  }
+});
+app.use(lusca.xframe('SAMEORIGIN'));
+app.use(lusca.xssProtection(true));
+app.disable('x-powered-by');
+
 app.use(function(req, res, next) {
   res.locals.user = req.user;
   res.locals.gaCode = secrets.googleAnalyticsCode;
@@ -155,10 +163,10 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.delete('/account', passportConf.isAuthenticated, userController.deleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-//app.get('/books', bookController.getBooks);
-app.get('/attempts',attemptController.getAttempts)
+//app.get('/attempts',attemptController.getAttemptsJSON)
 app.get('/attemptsJSON', attemptController.getAttemptsJSON);
 app.post('/postAttempts', attemptController.postAttempts);
+app.get('/getRunMeet',attemptController.getRunMeet)
 
 /**
  * API examples routes.

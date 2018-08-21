@@ -27,7 +27,6 @@ class Checkin extends React.Component {
 
     async submitForm() {
         console.log('submitting form');
-
         console.log(this.state);
 
         const formData = {
@@ -35,13 +34,15 @@ class Checkin extends React.Component {
         };
 
         // TODO: This is not working because of security issue w/ xsrf
-
+        
         const xsrfCookie = Cookies.get('XSRF-TOKEN');
+
         const headers = new Headers({
             'XSRF-TOKEN': xsrfCookie,
             '_csrf': xsrfCookie,
         });
 
+        console.log(formData)
         const res = await fetch('/postAttempts', {
             method: 'POST',
             headers,
@@ -66,8 +67,9 @@ class Checkin extends React.Component {
     }
 
     render() {
-      const attemptsElements = this.state.data.map((attempt) => {
-        return <div>{attempt.attempt_num}</div>;
+    console.log(this.state.data)
+      const attemptsElements = this.state.data.map((person) => {
+        return <div key ={person.person_id}> {person.person_last_name}  {person.person_first_name} </div>;
       });
 
       const formElements = this.renderForm();

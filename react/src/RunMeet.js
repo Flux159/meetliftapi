@@ -6,6 +6,9 @@ import LifterTable from './LifterTable.js';
 import ReactCountdownClock from "react-countdown-clock";
 import "react-table/react-table.css";
 
+
+
+
 var lifters =[ 
     [// squat;
       [ //  squat attempt 0
@@ -71,6 +74,17 @@ class RunMeet extends React.Component {
       time:60
     };
   }
+  componentDidMount() {
+    this.getAttempts();
+}
+
+  async getAttempts() {
+    const res = await fetch('/getRunMeet');
+    const data = await res.json();
+    //this.setState({data});
+    console.log(data)
+  }
+
   nextlift(res){ 
     // set the result of the lift 
     let updatelifter =[...this.state.lifters]

@@ -39,13 +39,11 @@ class BarbellCalc extends React.Component{
         for (var i =0; i<loadedbar.length; i++){
             loadedbar[i][1]=Math.min(Math.floor(remainder/(2*loadedbar[i][0])) , plateinv[i][1] );
             remainder= remainder - loadedbar[i][0]* loadedbar[i][1] *2;
-            
             for(var j=0; j<loadedbar[i][1];j++){
               bar_rhs.push(loadedbar[i][2])
             };
         };
         bar_rhs.push(collarimg)
-        console.log(loadedbar)
         return(
             <span>{bar_rhs}</span>
         )

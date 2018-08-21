@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "bitgo": "^1.6.1",
+    "bitgo": "4.34.0",
     "bluebird": "^3.3.5",
     "body-parser": "^1.15.1",
     "cheerio": "^0.20.0",
@@ -70,7 +70,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^2.4.5",
-    "supertest": "^1.2.0"
+    "supertest": "3.1.0"
   },
   "license": "MIT",
   "author": "Piotr Dabrowski, PureDev (http://blog.puredev.eu/)",

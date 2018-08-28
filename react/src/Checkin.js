@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Cookies from 'js-cookie';
+import CheckInTable from './CheckInTable.js';
 
 class Checkin extends React.Component {
     state = {
@@ -10,9 +11,9 @@ class Checkin extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.updateCheckinData = this.updateCheckinData.bind(this);
         this.submitForm = this.submitForm.bind(this);
+        this.renderEditable = this.renderEditable.bind(this);
     }
 
     componentDidMount() {
@@ -20,7 +21,7 @@ class Checkin extends React.Component {
     }
 
     async requestAttempts() {
-        const res = await fetch('/attemptsJSON');
+        const res = await fetch('/getCheckIn');
         const data = await res.json();
         this.setState({data});
     }
@@ -28,7 +29,6 @@ class Checkin extends React.Component {
     async submitForm() {
         console.log('submitting form');
         console.log(this.state);
-
         const formData = {
             checkinData: this.state.checkinData,
         };
@@ -36,27 +36,41 @@ class Checkin extends React.Component {
         // TODO: This is not working because of security issue w/ xsrf
         
         const xsrfCookie = Cookies.get('XSRF-TOKEN');
-
         const headers = new Headers({
             'XSRF-TOKEN': xsrfCookie,
             '_csrf': xsrfCookie,
         });
 
-        console.log(formData)
+        console.log("formdata",formData)
         const res = await fetch('/postAttempts', {
             method: 'POST',
             headers,
             credentials: 'include',
             body: JSON.stringify(formData),
         })
-
-        console.log(res);
     }
 
     updateCheckinData(e) {
         this.setState({checkinData: e.target.value});
     }
-
+    
+    renderEditable(cellInfo) {
+        return (
+          <div
+            style={{ backgroundColor: "#fafafa" }}
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={e => {
+              const data = [...this.state.data];
+              data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+              this.setState({ data });
+            }}
+            dangerouslySetInnerHTML={{
+              __html: this.state.data[cellInfo.index][cellInfo.column.id]
+            }}
+          />
+        );
+    }
     renderForm() {
         return (
             <form>
@@ -67,17 +81,18 @@ class Checkin extends React.Component {
     }
 
     render() {
-    console.log(this.state.data)
-      const attemptsElements = this.state.data.map((person) => {
-        return <div key ={person.person_id}> {person.person_last_name}  {person.person_first_name} </div>;
-      });
+    
+    const attemptsElements = this.state.data.map((person) => {
+    return <div key ={person.person_id}> {person.person_name} </div>;
+    });
 
-      const formElements = this.renderForm();
+    const formElements = this.renderForm();
 
       return (<div>
           Checkin
-          {attemptsElements}
-          {formElements}
+          
+          <CheckInTable data= {this.state.data}/>
+
       </div>);
     }
 }

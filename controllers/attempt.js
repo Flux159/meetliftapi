@@ -46,9 +46,8 @@ async function myFun() {
   }
 }
  */
-exports.getAttemptsJSON = function(req, res) {
-  db.sequelize.query("select p.person_id, p.person_first_name, p.person_last_name, p.gender, cp.final_weight, cp.squat_rh, cp.bench_rh, cp.team, cp.flight from comp_participant cp   inner join person p on cp.person_id=p.person_id",
-  { type: sequelize.QueryTypes.SELECT}).then(function(docs) {
+exports.getCheckIn = function(req, res) {
+  db.sequelize.query("  select p.person_id, p.person_first_name || ' ' || p.person_last_name  as person_name, cp.flight, cp.team, cp.est_weight, cp.final_weight, cp.squat_rh, cp.bench_rh   from comp_participant cp   inner join person p on cp.person_id=p.person_id   order by cp.flight ",  { type: sequelize.QueryTypes.SELECT}).then(function(docs) {
     res.json(docs);
     //console.log(docs)
   });
@@ -56,6 +55,7 @@ exports.getAttemptsJSON = function(req, res) {
 
 exports.postAttempts = function(req, res) {
   // Handle stuff
+
   console.log(req);
   console.log(req.body);
 
@@ -67,7 +67,7 @@ exports.setAttempts = function (req,res){
 };
 
 exports.getRunMeet = function(req, res) {
-  db.sequelize.query("select p.person_first_name ||' '|| p.person_last_name, ce.comp_event_name, a.attempt_num, a.attempt_weight from attempt a   inner join comp_participant cp on a.comp_part_id=cp.comp_part_id     inner join comp_event ce on a.comp_event_id=ce.comp_event_id     inner join person p on cp.person_id=p.person_id",
+  db.sequelize.query(" select * from   crosstab($$  select p.person_first_name || ' ' || p.person_last_name as person_name, ce.comp_event_order || ce.comp_event_name ||  attempt_num, attempt_weight  from attempt a  inner join comp_participant cp on a.comp_part_id=cp.comp_part_id inner join comp_event ce on a.comp_event_id=ce.comp_event_id   inner join person p on cp.person_id=p.person_id  where ce.flight='B'  order by person_name,  ce.comp_event_order || ce.comp_event_name ||  attempt_num    $$) as ct(person_name text, sqt1 numeric(7,2), sqt2 numeric(7,2), sqt3 numeric(7,2), prs1 numeric(7,2), prs2 numeric(7,2),prs3 numeric(7,2),  dl1 numeric(7,2) , dl2 numeric(7,2) ,dl3 numeric(7,2))",
   { type: sequelize.QueryTypes.SELECT}).then(function(docs) {
     res.json(docs);
     //console.log(docs)

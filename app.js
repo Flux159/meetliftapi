@@ -18,7 +18,6 @@ var methodOverride = require('method-override');
 var multer = require('multer');
 var ejsEngine = require('ejs-mate');
 var Promise = require('bluebird');
-var formidable = require('express-formidable');
 
 //var MySQLStore = require('connect-mysql')({ session: session });
 var flash = require('express-flash');
@@ -114,16 +113,11 @@ app.use(flash());
 
 // TODO: I think that this line is causing xsrf/csrf issue when posting to /postAttempts
 
-app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
-    next();
-  } else {
-    lusca.csrf()(req, res, next);
-  }
-});
-app.use(lusca.xframe('SAMEORIGIN'));
-app.use(lusca.xssProtection(true));
-app.disable('x-powered-by');
+app.use(lusca({
+  csrf: { angular: true },
+  xframe: 'SAMEORIGIN',
+   xssProtection: true
+ }));
 
 app.use(function(req, res, next) {
   res.locals.user = req.user;
@@ -164,7 +158,7 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.delete('/account', passportConf.isAuthenticated, userController.deleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 //app.get('/attempts',attemptController.getAttemptsJSON)
-app.get('/attemptsJSON', attemptController.getAttemptsJSON);
+app.get('/getCheckIn', attemptController.getCheckIn);
 app.post('/postAttempts', attemptController.postAttempts);
 app.get('/getRunMeet',attemptController.getRunMeet)
 

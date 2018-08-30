@@ -1,14 +1,14 @@
 
 import React from 'react';
 import Cookies from 'js-cookie';
-import CheckInTable from './CheckInTable.js';
+import ReactTable from "react-table";
+// import "react-table/react-table.css";
 
 class Checkin extends React.Component {
     state = {
         data: [],
         checkinData: '',
     };
-
     constructor(props) {
         super(props);
         this.updateCheckinData = this.updateCheckinData.bind(this);
@@ -48,12 +48,19 @@ class Checkin extends React.Component {
             credentials: 'include',
             body: JSON.stringify(formData),
         })
+        // then 
+        // set the currentlifter = next lfiter
+        // if no more lifters left, set attempt = attempt +1 
+
+        // setstate (data.attemid = res)
+
     }
 
     updateCheckinData(e) {
         this.setState({checkinData: e.target.value});
     }
     
+    //This should be moved to checkin table 
     renderEditable(cellInfo) {
         return (
           <div
@@ -79,7 +86,6 @@ class Checkin extends React.Component {
             </form>
         );
     }
-
     render() {
     
     const attemptsElements = this.state.data.map((person) => {
@@ -90,9 +96,45 @@ class Checkin extends React.Component {
 
       return (<div>
           Checkin
-          
-          <CheckInTable data= {this.state.data}/>
-
+          <ReactTable
+             columns={ [
+              {
+                Header: "Name",
+                accessor: "person_name" ,     
+              },
+              {
+                Header: "Flight",
+                accessor: "flight",
+              },
+              {
+                Header: "Team",
+                accessor: "team",
+              },
+              {
+                Header: "Est. Weight",
+                accessor: "est_weight",
+              },
+              {
+                Header: "Final Weight",
+                accessor: "final_weight",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Sqt RH",
+                accessor: "squat_rh",
+                Cell: this.renderEditable
+              },
+              {
+                Header: "Press RH",
+                accessor: "bench_rh",
+                Cell: this.renderEditable
+              },
+            ]}
+            data= {this.state.data}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          />
+          {formElements}
       </div>);
     }
 }

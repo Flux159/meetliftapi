@@ -6,9 +6,6 @@ import LifterTable from './LifterTable.js';
 import ReactCountdownClock from "react-countdown-clock";
 import "react-table/react-table.css";
 
-
-
-
 var lifters =[ 
     [// squat;
       [ //  squat attempt 0
@@ -62,13 +59,20 @@ function sortlift(a, b) {
     }
 }
 
+
+// event = [ sqt1 A, sqt1 b, sqt 2a, sqt 2 b, sqt3, bench1, bench2, bench3, ]
+
+//post call back
+//initial currevent = event[0]
+// this.setstate( currevent = event{event.indexOf(this.state.currevent) +1 }) 
+
 class RunMeet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       lifters: lifters,
-      currevent :0,
-      currattempt:0,
+      currevent :0, 
+      currattempt:0,  
       currlifter :0,
       timerpaused: true,
       time:60
@@ -160,3 +164,5 @@ class RunMeet extends React.Component {
 } 
 
 export default RunMeet;
+
+

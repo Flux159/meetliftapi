@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <Link to='/checkin'>Checkin Page</Link>
+          <Link to='/checkin'>Checkin</Link>  <Link to='/'>RunMeet</Link> 
           <Route exact path="/" component={RunMeet} />
           <Route path="/checkin" component={Checkin} />
         </div>

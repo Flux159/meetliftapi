@@ -1,15 +1,11 @@
-
 import React from 'react';
 import BarbellCalc from './BarbellCalc';
-import RunMeetTable from './RunMeetTable.js';
-
+import ReactTable from "react-table";
 
 import ReactCountdownClock from "react-countdown-clock";
 import "react-table/react-table.css";
 
-
 var data=[];
-
 
 class RunMeet extends React.Component {
   constructor(props) {
@@ -32,31 +28,96 @@ class RunMeet extends React.Component {
 
   renderEditable(cellInfo) {
     return (
-      <div
+    <div
         style={{ backgroundColor: "#fafafa" }}
         contentEditable
         suppressContentEditableWarning
         onBlur={e => {
-          const data = [...this.state.data];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ data });
+        const data = [...this.state.data];
+        data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+        this.setState({ data });
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+        __html: this.state.data[cellInfo.index][cellInfo.column.id]
         }}
-      />
+    />
     );
-}
-  render() { 
-    /*const attemptsElements = this.state.data.map((attempt) => {
-      return <div key ={attempt.person_name}> {attempt.person_name}  {attempt.sqt1}  </div>;
-    });*/
+  }
 
+  render() { 
 
   return (
     <div >
       RUN MEET
-      <RunMeetTable data={this.state.data} />
+
+    <button > Good Lift </button> <br/> 
+    <button> Bad Lift </button> <br/>
+
+      <ReactTable
+            columns={[{
+              Header: "Lifter",
+              columns: [{
+                  Header: "Name",
+                  accessor: "person_name"
+                },]
+              },{
+              Header: "Squat",
+              columns: [{
+                  Header: "Squat 1",
+                  accessor: "sqt1",
+                  Cell: this.renderEditable
+                },{
+                  Header: "Squat 2",
+                  accessor: "sqt2",
+                  Cell: this.renderEditable
+               },{
+                Header: "Squat 3",
+                accessor: "sqt3",
+                Cell: this.renderEditable
+             }]
+            },{
+              Header: "Press",
+              columns: [{
+                  Header: "Press 1",
+                  accessor: "prs1",
+                  Cell: this.renderEditable
+                },{
+                  Header: "Press 2",
+                  accessor: "prs2",
+                  Cell: this.renderEditable
+               },{
+                Header: "Press 3",
+                accessor: "prs3",
+                Cell: this.renderEditable
+             }]
+            },{
+              Header: "Deadlift",
+              columns: [{
+                  Header: "Deadlift 1",
+                  accessor: "dl1",
+                  Cell: this.renderEditable
+                },{
+                  Header: "Deadlift 2",
+                  accessor: "dl2",
+                  Cell: this.renderEditable
+               },{
+                Header: "Deadlift 3",
+                accessor: "dl3",
+                Cell: this.renderEditable
+             }]
+            }
+          ]
+            }
+            defaultSorted={[
+              {
+                id: "sqt1",
+                desc: false
+              }
+            ]}
+            data= {this.state.data}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          />
 
     </div>
   );

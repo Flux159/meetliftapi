@@ -13,6 +13,7 @@ module.exports = function(db, DataTypes) {
       comp_event_order: DataTypes.INTEGER,
       no_of_attempts: DataTypes.INTEGER,
       flight: DataTypes.STRING,
+      comp_short_name: DataTypes.STRING,
     }, {
       tableName: 'comp_event',
       timestamps: false,

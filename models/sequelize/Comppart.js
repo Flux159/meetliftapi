@@ -21,10 +21,9 @@ module.exports = function(db, DataTypes) {
       classMethods: {
         associate: (models) => {
           CompPart.hasMany(models.Attempt,{foreignKey: 'comp_part_id',} );
-        },
-        associate: (models) => {
           CompPart.belongsTo(models.Person,{foreignKey: 'person_id',} );
         },
+
       },
   
     });

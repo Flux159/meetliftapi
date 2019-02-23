@@ -58,8 +58,14 @@ class RunMeet extends React.Component {
               Header: "Lifter",
               columns: [{
                   Header: "Name",
-                  accessor: "person_name"
-                },]
+                  id: "Name",
+                  accessor:  d => d.Person.person_first_name + " " + d.Person.person_last_name
+                },
+                {
+                  Header: "Flight",
+                  accessor: "flight"
+                },
+              ]
               },{
               Header: "Squat",
               columns: [{

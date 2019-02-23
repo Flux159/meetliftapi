@@ -12,30 +12,30 @@ insert into events(event_name) values ('Deadlift');
 -- Create competition event
 -- meet direct adds all of the events, their order and the flights 
 
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,1,'Squat - Flight A',1,3,'A', 'sqt');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name)  
-values (1,1,'Squat - Flight B',2,3,'B', 'sqt');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,2,'Bench - Flight A',3,3,'A','prs');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,2,'Bench - Flight B',4,3,'B','prs');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,3,'Deadlift - Flight A',5,3,'A','dl');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,3,'Deadlift - Flight B',6,3,'B','dl');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,1,'Squat - Flight C',7,3,'C', 'sqt');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,1,'Squat - Flight D',8,3,'D', 'sqt');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,2,'Bench - Flight C',9,3,'C','prs');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,2,'Bench - Flight D',10,3,'D','prs');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,3,'Deadlift - Flight C',11,3,'C','dl');
-insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight,comp_short_name) 
-values (1,3,'Deadlift - Flight D',12,3,'D','dl');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,1,'Squat - Flight A',1,3,'A');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,1,'Squat - Flight B',2,3,'B');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,2,'Bench - Flight A',3,3,'A');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,2,'Bench - Flight B',4,3,'B');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,3,'Deadlift - Flight A',5,3,'A');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,3,'Deadlift - Flight B',6,3,'B');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,1,'Squat - Flight C',7,3,'C');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,1,'Squat - Flight D',8,3,'D');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,2,'Bench - Flight C',9,3,'C');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,2,'Bench - Flight D',10,3,'D');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,3,'Deadlift - Flight C',11,3,'C');
+insert into comp_event(comp_id,event_id,comp_event_name,comp_event_order,no_of_attempts,flight) 
+values (1,3,'Deadlift - Flight D',12,3,'D');
 
 -- participants will add their info which will populate the person table
 

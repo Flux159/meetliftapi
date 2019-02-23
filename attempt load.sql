@@ -9,8 +9,8 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (4,5,1,190);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (5,3,1,70);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (4,3,1,80);
-insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,4,1,145);
 
+select * from attempt
 
 -- Squat - Flight B first attempt
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (1,2,1,220);
@@ -20,7 +20,7 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (7,2,1,225);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,2,1,270);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (9,2,1,250);
-
+-- Squat - Flight B second attempt
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (1,2,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (2,2,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (6,2,2,null);
@@ -29,8 +29,8 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,2,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (9,2,2,null);
 
-update attempt set attempt_weight=225 where comp_part_id=1 and comp_event_id=2 and attempt_num=2
-
+update attempt set attempt_weight=225 where comp_part_id=1 and comp_event_id=2 and attempt_num=2;
+-- Squat - Flight B third attempt
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (1,2,3,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (2,2,3,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (6,2,3,null);
@@ -45,6 +45,7 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (3,4,1,125);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (6,4,1,135);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (7,4,1,110);
+insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,4,1,145);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (9,4,1,127.5);
 
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (1,4,2,null);
@@ -52,6 +53,7 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (3,4,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (6,4,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (7,4,2,null);
+insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,4,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (9,4,2,null);
 
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (1,4,3,null);
@@ -59,6 +61,7 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (3,4,3,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (6,4,3,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (7,4,3,null);
+insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (8,4,2,null);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (9,4,3,null);
 
 
@@ -99,12 +102,14 @@ insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) v
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (11,8,1,245);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (10,8,1,225);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (12,8,1,215);
+
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (13,10,1,160);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (14,10,1,150);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (12,10,1,125);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (15,10,1,135);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (11,10,1,135);
-insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (10,10,1,140);
+insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (10,10,1,140)
+;
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (15,12,1,315);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (11,12,1,280);
 insert into attempt (comp_part_id,comp_event_id, attempt_num ,attempt_weight ) values (12,12,1,220);

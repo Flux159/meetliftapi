@@ -1,5 +1,6 @@
 
 var db = require('../models/sequelize');
+var _ = require('lodash');
 const sequelize = require('sequelize');
 const {Attempt, CompPart, Person, CompEvent} = db;
 
@@ -67,19 +68,35 @@ exports.setAttempts = function (req,res){
 
 };
 
-//getMeetEvents
-//serializers format the data 
 
 // THIS IS WHAT I NEED TO WORK ON
 exports.getRunMeet = function(req, res) {
-  db.sequelize.query(" select * from   crosstab($$  select p.person_first_name || ' ' || p.person_last_name as person_name, ce.comp_event_order || ce.comp_event_name ||  attempt_num, attempt_weight  from attempt a  inner join comp_participant cp on a.comp_part_id=cp.comp_part_id inner join comp_event ce on a.comp_event_id=ce.comp_event_id   inner join person p on cp.person_id=p.person_id  where ce.flight='B'  order by person_name,  ce.comp_event_order || ce.comp_event_name ||  attempt_num    $$) as ct(person_name text, sqt1 numeric(7,2), sqt2 numeric(7,2), sqt3 numeric(7,2), prs1 numeric(7,2), prs2 numeric(7,2),prs3 numeric(7,2),  dl1 numeric(7,2) , dl2 numeric(7,2) ,dl3 numeric(7,2))",
-  { type: sequelize.QueryTypes.SELECT})
-  .then(function(docs) {
+  CompPart.findAll({
+    attributes:['team','flight','comp_part_id'],
+    include:[{
+      model: Person,
+      attributes: [ 'person_first_name','person_last_name'],
+    },{
+      model: Attempt,
+      attributes:['attempt_num', 'attempt_weight','attemptid','comp_event_id' ],
+      include: [{
+        model: CompEvent,
+        attributes:['comp_short_name'],
+    }]
+    }],
+  }).then(function(docs) {
     
-    // res.json( parsed docs, parsed is a function which does the pivot )
-    
-    res.json(docs);
-    
+    //var jsondocs = docs.toJson();
+    //console.log(jsondocs);
+    /*var att = jsondocs.Attempts;
+    var res = _.pick(jsondocs,['team','flight','comp_part_id','Person']);
+    //res['person_name']=docs.Person.person_first_name.concat(docs.Person.person_last_name);
+
+    for(var i=0; i<jsondocs.Attempts.length ; ++i){
+        var event =att[i].CompEvent.comp_short_name.concat(att[i].attempt_num)
+        res[event]=_.pick(att[i], ['attempt_num', 'attempt_weight', 'attemptid' ,'comp_event_id' ]);
+    };*/
+  res.json(docs)
   });
 };
 

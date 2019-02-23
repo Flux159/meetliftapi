@@ -45,10 +45,18 @@ $$) as ct(person_name text, sqt1 numeric(7,2), sqt2 numeric(7,2), sqt3 numeric(7
 dl1 numeric(7,2) , dl2 numeric(7,2) ,dl3 numeric(7,2))
 
 
-select a.comp_part_id, p.person_first_name || ' ' || p.person_last_name as person_name, ce.comp_event_order || ce.comp_event_name ||  attempt_num, attempt_weight
+select a.comp_part_id, p.person_first_name || ' ' || p.person_last_name as person_name,
+ce.comp_event_order || ce.comp_event_name ||  attempt_num, attempt_weight , attempt_result
 from attempt a
 inner join comp_participant cp on a.comp_part_id=cp.comp_part_id
 inner join comp_event ce on a.comp_event_id=ce.comp_event_id
 inner join person p on cp.person_id=p.person_id
 where ce.flight='B'
 order by a.comp_part_id, person_name,  ce.comp_event_order || ce.comp_event_name ||  attempt_num
+
+-- do this on the server side 
+select * from attempt a
+inner join comp_participant cp on a.comp_part_id=cp.comp_part_id
+inner join person p on cp.person_id=p.person_id
+
+select * from comp_event order by comp_event_order
